@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             btnLogin = new Button();
             lblPasswordManager = new Label();
             btnRegister = new Button();
@@ -66,6 +67,7 @@
             btnRegister.TabIndex = 3;
             btnRegister.Text = "Register";
             btnRegister.UseVisualStyleBackColor = true;
+            btnRegister.Click += btnRegister_Click;
             // 
             // lblAnimation
             // 
@@ -76,10 +78,11 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
-            ClientSize = new Size(802, 445);
+            ClientSize = new Size(794, 445);
             Controls.Add(btnRegister);
             Controls.Add(lblPasswordManager);
             Controls.Add(btnLogin);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form1";
             Text = "Password Manager";
             Load += Form1_Load;

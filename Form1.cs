@@ -10,7 +10,7 @@ namespace Password_Manager
 
         private void Form1_Load(object sender, EventArgs e)
         {
-  
+
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -52,6 +52,12 @@ namespace Password_Manager
         private void Form1_MouseHover(object sender, EventArgs e)
         {
             lblAnimation.Stop();
+        }
+
+        private void btnRegister_Click(object sender, EventArgs e)
+        {
+            RegisterForm registerForm = new RegisterForm();
+            registerForm.Show();
         }
     }
 }
