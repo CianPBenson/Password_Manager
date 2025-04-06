@@ -236,20 +236,18 @@ namespace Password_Manager
 
             if (!File.Exists(filePath)) return false;
 
-
             // Make sure the folder exists
             Directory.CreateDirectory("C:\\Temp");
 
             // If the file doesn't exist, just return (no existing users yet)
-            if (!File.Exists(filePath))
-                return;
-
+            if (!File.Exists(filePath)) return false;
 
             bool usernameTaken = false;
             bool emailTaken = false;
 
+            // 💡 add your future checking logic here (if needed)
 
-          
+            return usernameTaken || emailTaken; // ✅ add this line to fix the error
         }
 
 
