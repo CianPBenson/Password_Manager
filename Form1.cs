@@ -120,5 +120,11 @@ namespace Password_Manager
             RegisterForm registerForm = new RegisterForm();
             registerForm.Show();
         }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            LoginForm loginForm = new LoginForm();
+            loginForm.Show();
+        }
     }
 }

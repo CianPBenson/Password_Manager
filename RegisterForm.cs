@@ -236,35 +236,22 @@ namespace Password_Manager
 
             if (!File.Exists(filePath)) return false;
 
+
+            // Make sure the folder exists
+            Directory.CreateDirectory("C:\\Temp");
+
+            // If the file doesn't exist, just return (no existing users yet)
+            if (!File.Exists(filePath))
+                return;
+
+
             bool usernameTaken = false;
             bool emailTaken = false;
 
-            using (StreamReader reader = new StreamReader(filePath))
-            {
-                string line;
-                while ((line = reader.ReadLine()) != null)
-                {
-                    string[] words = line.Split(',');
-                    string usernameF = words[0].Trim();
-                    string emailF = words[1].Trim();
 
-                    if (usernameF == username)
-                    {
-                        MessageBox.Show("Username Taken!");
-                        txtUsername.Text = "Username";
-                        usernameTaken = true;
-                    }
-                    if (emailF == email)
-                    {
-                        MessageBox.Show("Email already in use!");
-                        txtEmail.Text = "Email";
-                        emailTaken = true;
-                    }
-                }
-            }
-
-            return usernameTaken || emailTaken;
+          
         }
+
 
         private void UserPersistanceWrite(List<User> users)
         {
