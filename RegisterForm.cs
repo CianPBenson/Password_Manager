@@ -188,14 +188,21 @@ namespace Password_Manager
         {
             string filePath = "C:\\Temp\\userPersistance.txt";
 
+            // Make sure the folder exists
             Directory.CreateDirectory("C:\\Temp");
 
-            using (StreamReader reader = new StreamReader("C:\\Temp\\userPersistance.txt")) 
+            // If the file doesn't exist, just return (no existing users yet)
+            if (!File.Exists(filePath))
+                return;
+
+            using (StreamReader reader = new StreamReader(filePath))
             {
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
                     string[] words = line.Split(',');
+                    if (words.Length < 3) continue;
+
                     string usernameF = words[0].Trim();
                     string emailF = words[1].Trim();
                     string passwordF = words[2].Trim();
@@ -203,18 +210,17 @@ namespace Password_Manager
                     if (usernameF == username)
                     {
                         MessageBox.Show("Username Taken!");
-
                         txtUsername.Text = "Username";
                     }
                     if (emailF == email)
                     {
                         MessageBox.Show("Email already in use!");
-
                         txtEmail.Text = "Email";
                     }
                 }
             }
         }
+
 
         private void UserPersistanceWrite(List<User> users)
         {
