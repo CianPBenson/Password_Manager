@@ -231,23 +231,43 @@ namespace Password_Manager
 
         public bool UserPersistanceRead(string username, string email)
         {
-            string projectDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            string filePath = Path.Combine(projectDirectory, "userPersistance.txt");
 
-            if (!File.Exists(filePath)) return false;
+            string filePath = @"C:\Temp\userPersistance.txt";
+            Directory.CreateDirectory(@"C:\Temp");
 
-            // Make sure the folder exists
-            Directory.CreateDirectory("C:\\Temp");
-
-            // If the file doesn't exist, just return (no existing users yet)
             if (!File.Exists(filePath)) return false;
 
             bool usernameTaken = false;
             bool emailTaken = false;
 
-            // 💡 add your future checking logic here (if needed)
+            using (StreamReader reader = new StreamReader(filePath))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    string[] parts = line.Split(',');
+                    if (parts.Length < 3) continue;
 
-            return usernameTaken || emailTaken; // ✅ add this line to fix the error
+                    string fileUsername = parts[0].Trim();
+                    string fileEmail = parts[1].Trim();
+
+                    if (fileUsername.Equals(username, StringComparison.OrdinalIgnoreCase))
+                    {
+                        MessageBox.Show("Username Taken!");
+                        txtUsername.Text = "Username";
+                        usernameTaken = true;
+                    }
+
+                    if (fileEmail.Equals(email, StringComparison.OrdinalIgnoreCase))
+                    {
+                        MessageBox.Show("Email already in use!");
+                        txtEmail.Text = "Email";
+                        emailTaken = true;
+                    }
+                }
+            }
+
+            return usernameTaken || emailTaken;
         }
 
 
@@ -255,8 +275,8 @@ namespace Password_Manager
         {
             try
             {
-                string projectDirectory = AppDomain.CurrentDomain.BaseDirectory;
-                string filePath = Path.Combine(projectDirectory, "userPersistance.txt");
+                string filePath = @"C:\Temp\userPersistance.txt";
+                Directory.CreateDirectory(@"C:\Temp");
 
                 using (StreamWriter writer = new StreamWriter(filePath, true))
                 {
@@ -265,6 +285,8 @@ namespace Password_Manager
                         writer.WriteLine(user.ToString());
                     }
                 }
+
+                MessageBox.Show("User data saved successfully!");
             }
             catch (Exception ex)
             {
