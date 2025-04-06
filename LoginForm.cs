@@ -31,6 +31,7 @@ namespace Password_Manager
             }
 
             bool loginSuccess = false;
+            string loggedInUsername = "";
 
             using (StreamReader reader = new StreamReader(filePath))
             {
@@ -47,6 +48,7 @@ namespace Password_Manager
                     if (fileEmail == enteredEmail && filePassword == enteredPassword)
                     {
                         loginSuccess = true;
+                        loggedInUsername = fileUsername; 
                         break;
                     }
                 }
@@ -55,13 +57,18 @@ namespace Password_Manager
             if (loginSuccess)
             {
                 MessageBox.Show("Login successful!");
+                DashboardForm dashboard = new DashboardForm(loggedInUsername);
+                dashboard.Show();
                 this.Hide(); 
             }
             else
             {
                 MessageBox.Show("Invalid email or password.");
             }
+
         }
+
+
 
         private void label1_Click(object sender, EventArgs e)
         {
