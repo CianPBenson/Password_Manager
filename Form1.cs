@@ -1,16 +1,77 @@
+using Microsoft.VisualBasic.ApplicationServices;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+using StarLib;
+using System.Reflection.Emit;
+
 namespace Password_Manager
 {
     public partial class Form1 : Form
     {
+        private StarField starField = new StarField();
+        private System.Windows.Forms.Timer timer;
+        private Point mousePos;
         public Form1()
         {
-
             InitializeComponent();
+            this.DoubleBuffered = true;
+            this.BackColor = Color.Black;
+
+            this.MouseMove += (s, e) => mousePos = e.Location;
+            this.Resize += (s, e) => starField.Initialize(this.ClientSize);
+
+            starField.Initialize(this.ClientSize);
+
+            timer = new System.Windows.Forms.Timer();
+            timer.Interval = 16;
+            timer.Tick += (s, e) =>
+            {
+                starField.Update(mousePos, this.ClientSize);
+                Invalidate();
+            };
+            timer.Start();
+
+        }
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            CenterItems();
+        }
+        private void CenterItems()
+        {
+            int buttonSpacing = 60; 
+
+            lblPasswordManager.Location = new Point(
+                (this.ClientSize.Width - lblPasswordManager.Width) / 2,
+                (this.ClientSize.Height / 2) - 50);
+
+            int totalButtonsWidth = btnLogin.Width + buttonSpacing + btnRegister.Width;
+
+            int startX = (this.ClientSize.Width - totalButtonsWidth) / 2;
+            int y = (this.ClientSize.Height / 2) + 30;
+
+            btnLogin.Location = new Point(startX, y);
+            btnRegister.Location = new Point(startX + btnLogin.Width + buttonSpacing, y);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.Resize += Form1_Resize;
+        }
 
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            starField.Draw(e.Graphics);
         }
 
         private void Timer_Tick(object sender, EventArgs e)
