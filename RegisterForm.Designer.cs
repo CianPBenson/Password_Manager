@@ -32,7 +32,7 @@
             txtUsername = new TextBox();
             txtPassword = new TextBox();
             txtConfirm = new TextBox();
-            label4 = new Label();
+            lblRegister = new Label();
             txtEmail = new TextBox();
             btnSubmit = new Button();
             SuspendLayout();
@@ -44,8 +44,6 @@
             txtUsername.Size = new Size(203, 27);
             txtUsername.TabIndex = 0;
             txtUsername.Text = "Username";
-            txtUsername.Click += txtUsername_Click;
-            txtUsername.TextChanged += textBox1_TextChanged;
             // 
             // txtPassword
             // 
@@ -54,8 +52,6 @@
             txtPassword.Size = new Size(203, 27);
             txtPassword.TabIndex = 1;
             txtPassword.Text = "Password";
-            txtPassword.Click += txtPassword_Click;
-            txtPassword.TextChanged += txtPassword_TextChanged;
             // 
             // txtConfirm
             // 
@@ -64,18 +60,17 @@
             txtConfirm.Size = new Size(203, 27);
             txtConfirm.TabIndex = 2;
             txtConfirm.Text = "Confirm Password";
-            txtConfirm.Click += txtConfirm_Click;
             // 
-            // label4
+            // lblRegister
             // 
-            label4.AutoSize = true;
-            label4.Font = new Font("Segoe UI", 27F, FontStyle.Bold);
-            label4.ForeColor = Color.White;
-            label4.Location = new Point(301, 19);
-            label4.Name = "label4";
-            label4.Size = new Size(200, 61);
-            label4.TabIndex = 6;
-            label4.Text = "Register";
+            lblRegister.AutoSize = true;
+            lblRegister.Font = new Font("Segoe UI", 27F, FontStyle.Bold);
+            lblRegister.ForeColor = Color.White;
+            lblRegister.Location = new Point(301, 19);
+            lblRegister.Name = "lblRegister";
+            lblRegister.Size = new Size(200, 61);
+            lblRegister.TabIndex = 6;
+            lblRegister.Text = "Register";
             // 
             // txtEmail
             // 
@@ -84,8 +79,6 @@
             txtEmail.Size = new Size(203, 27);
             txtEmail.TabIndex = 7;
             txtEmail.Text = "Email";
-            txtEmail.Click += txtEmail_Click;
-            txtEmail.TextChanged += txtEmail_TextChanged;
             // 
             // btnSubmit
             // 
@@ -107,7 +100,7 @@
             ClientSize = new Size(800, 450);
             Controls.Add(btnSubmit);
             Controls.Add(txtEmail);
-            Controls.Add(label4);
+            Controls.Add(lblRegister);
             Controls.Add(txtConfirm);
             Controls.Add(txtPassword);
             Controls.Add(txtUsername);
@@ -124,7 +117,7 @@
         private TextBox txtUsername;
         private TextBox txtPassword;
         private TextBox txtConfirm;
-        private Label label4;
+        private Label lblRegister;
         private TextBox txtEmail;
         private Button btnSubmit;
     }
