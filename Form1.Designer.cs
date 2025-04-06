@@ -39,21 +39,24 @@
             // btnLogin
             // 
             btnLogin.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnLogin.Location = new Point(260, 245);
+            btnLogin.Location = new Point(325, 306);
+            btnLogin.Margin = new Padding(4, 4, 4, 4);
             btnLogin.Name = "btnLogin";
-            btnLogin.Size = new Size(107, 47);
+            btnLogin.Size = new Size(134, 59);
             btnLogin.TabIndex = 0;
             btnLogin.Text = "Login";
             btnLogin.UseVisualStyleBackColor = true;
+            btnLogin.Click += btnLogin_Click;
             // 
             // lblPasswordManager
             // 
             lblPasswordManager.AutoSize = true;
             lblPasswordManager.Font = new Font("Segoe UI", 22.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblPasswordManager.ForeColor = Color.White;
-            lblPasswordManager.Location = new Point(214, 160);
+            lblPasswordManager.Location = new Point(268, 200);
+            lblPasswordManager.Margin = new Padding(4, 0, 4, 0);
             lblPasswordManager.Name = "lblPasswordManager";
-            lblPasswordManager.Size = new Size(352, 50);
+            lblPasswordManager.Size = new Size(428, 61);
             lblPasswordManager.TabIndex = 2;
             lblPasswordManager.Text = "Password Manager";
             lblPasswordManager.MouseHover += lblPasswordManager_MouseHover;
@@ -61,9 +64,10 @@
             // btnRegister
             // 
             btnRegister.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnRegister.Location = new Point(401, 245);
+            btnRegister.Location = new Point(501, 306);
+            btnRegister.Margin = new Padding(4, 4, 4, 4);
             btnRegister.Name = "btnRegister";
-            btnRegister.Size = new Size(107, 47);
+            btnRegister.Size = new Size(134, 59);
             btnRegister.TabIndex = 3;
             btnRegister.Text = "Register";
             btnRegister.UseVisualStyleBackColor = true;
@@ -75,14 +79,15 @@
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
-            ClientSize = new Size(794, 445);
+            ClientSize = new Size(992, 556);
             Controls.Add(btnRegister);
             Controls.Add(lblPasswordManager);
             Controls.Add(btnLogin);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(4, 4, 4, 4);
             Name = "Form1";
             Text = "Password Manager";
             Load += Form1_Load;
