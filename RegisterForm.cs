@@ -229,9 +229,9 @@ namespace Password_Manager
             MessageBox.Show("User registered successfully!");
         }
 
-        public bool UserPersistanceRead(string username, string email)
-        {
-             string filePath = @"C:\Temp\userPersistance.txt";
+   public bool UserPersistanceRead(string username, string email)
+{
+    string filePath = @"C:\Temp\userPersistance.txt";
     Directory.CreateDirectory(@"C:\Temp");
 
     if (!File.Exists(filePath)) return false;
@@ -267,10 +267,7 @@ namespace Password_Manager
     }
 
     return usernameTaken || emailTaken;
-
-
-          
-        }
+}
 
 
         private void UserPersistanceWrite(List<User> users)
@@ -287,6 +284,8 @@ namespace Password_Manager
                         writer.WriteLine(user.ToString());
                     }
                 }
+
+                MessageBox.Show("User data saved successfully!");
             }
             catch (Exception ex)
             {
