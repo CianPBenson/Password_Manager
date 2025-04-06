@@ -243,7 +243,7 @@ namespace Password_Manager
             using (StreamReader reader = new StreamReader(filePath))
             {
                 string line;
-                while ((line = reader.ReadLine()) != null)
+                while ((line = reader.ReadLine()) != null) 
                 {
                     string[] parts = line.Split(',');
                     if (parts.Length < 3) continue;
