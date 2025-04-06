@@ -39,10 +39,15 @@
             Password = new ColumnHeader();
             btnTogglePasswords = new Button();
             btnEditPassword = new Button();
-            btnDeletePassword = new Button();
-            btnGeneratePassword = new Button();
-            btnBulkDeletePasswords = new Button();
-            btnSharePassword = new Button();
+btnDeletePassword = new Button();
+btnGeneratePassword = new Button();
+btnBulkDeletePasswords = new Button();
+btnSharePassword = new Button();
+
+btnBackup = new Button();
+btnRestore = new Button();
+btnExport = new Button();
+
             SuspendLayout();
             // 
             // lblWelcome
@@ -129,66 +134,85 @@
             btnTogglePasswords.UseVisualStyleBackColor = true;
             btnTogglePasswords.Click += btnTogglePasswords_Click;
             // 
-            // btnEditPassword
-            // 
-            btnEditPassword.Location = new Point(37, 288);
-            btnEditPassword.Name = "btnEditPassword";
-            btnEditPassword.Size = new Size(139, 34);
-            btnEditPassword.TabIndex = 9;
-            btnEditPassword.Text = "Edit Password";
-            btnEditPassword.UseVisualStyleBackColor = true;
-            btnEditPassword.Click += btnEditPassword_Click;
-            // 
-            // btnDeletePassword
-            // 
-            btnDeletePassword.Location = new Point(37, 328);
-            btnDeletePassword.Name = "btnDeletePassword";
-            btnDeletePassword.Size = new Size(139, 34);
-            btnDeletePassword.TabIndex = 10;
-            btnDeletePassword.Text = "Delete Password";
-            btnDeletePassword.UseVisualStyleBackColor = true;
-            btnDeletePassword.Click += btnDeletePassword_Click;
-            // 
-            // btnGeneratePassword
-            // 
-            btnGeneratePassword.Location = new Point(271, 328);
-            btnGeneratePassword.Name = "btnGeneratePassword";
-            btnGeneratePassword.Size = new Size(112, 34);
-            btnGeneratePassword.TabIndex = 11;
-            btnGeneratePassword.Text = "Generate Password";
-            btnGeneratePassword.UseVisualStyleBackColor = true;
-            btnGeneratePassword.Click += btnGeneratePassword_Click;
-            // 
-            // btnBulkDeletePasswords
-            // 
-            btnBulkDeletePasswords.Location = new Point(37, 368);
-            btnBulkDeletePasswords.Name = "btnBulkDeletePasswords";
-            btnBulkDeletePasswords.Size = new Size(139, 34);
-            btnBulkDeletePasswords.TabIndex = 12;
-            btnBulkDeletePasswords.Text = "Bulk Delete Passwords";
-            btnBulkDeletePasswords.UseVisualStyleBackColor = true;
-            btnBulkDeletePasswords.Click += btnBulkDeletePasswords_Click;
-            // 
-            // btnSharePassword
-            // 
-            btnSharePassword.Location = new Point(271, 368);
-            btnSharePassword.Name = "btnSharePassword";
-            btnSharePassword.Size = new Size(112, 34);
-            btnSharePassword.TabIndex = 13;
-            btnSharePassword.Text = "Share Password";
-            btnSharePassword.UseVisualStyleBackColor = true;
-            btnSharePassword.Click += btnSharePassword_Click;
+btnEditPassword.Location = new Point(37, 288);
+btnEditPassword.Name = "btnEditPassword";
+btnEditPassword.Size = new Size(139, 34);
+btnEditPassword.TabIndex = 9;
+btnEditPassword.Text = "Edit Password";
+btnEditPassword.UseVisualStyleBackColor = true;
+btnEditPassword.Click += btnEditPassword_Click;
+
+btnDeletePassword.Location = new Point(37, 328);
+btnDeletePassword.Name = "btnDeletePassword";
+btnDeletePassword.Size = new Size(139, 34);
+btnDeletePassword.TabIndex = 10;
+btnDeletePassword.Text = "Delete Password";
+btnDeletePassword.UseVisualStyleBackColor = true;
+btnDeletePassword.Click += btnDeletePassword_Click;
+
+btnGeneratePassword.Location = new Point(271, 328);
+btnGeneratePassword.Name = "btnGeneratePassword";
+btnGeneratePassword.Size = new Size(112, 34);
+btnGeneratePassword.TabIndex = 11;
+btnGeneratePassword.Text = "Generate Password";
+btnGeneratePassword.UseVisualStyleBackColor = true;
+btnGeneratePassword.Click += btnGeneratePassword_Click;
+
+btnBulkDeletePasswords.Location = new Point(37, 368);
+btnBulkDeletePasswords.Name = "btnBulkDeletePasswords";
+btnBulkDeletePasswords.Size = new Size(139, 34);
+btnBulkDeletePasswords.TabIndex = 12;
+btnBulkDeletePasswords.Text = "Bulk Delete Passwords";
+btnBulkDeletePasswords.UseVisualStyleBackColor = true;
+btnBulkDeletePasswords.Click += btnBulkDeletePasswords_Click;
+
+btnSharePassword.Location = new Point(271, 368);
+btnSharePassword.Name = "btnSharePassword";
+btnSharePassword.Size = new Size(112, 34);
+btnSharePassword.TabIndex = 13;
+btnSharePassword.Text = "Share Password";
+btnSharePassword.UseVisualStyleBackColor = true;
+btnSharePassword.Click += btnSharePassword_Click;
+
+btnBackup.Location = new Point(675, 394);
+btnBackup.Name = "btnBackup";
+btnBackup.Size = new Size(221, 34);
+btnBackup.TabIndex = 14;
+btnBackup.Text = "BackUpPasswords";
+btnBackup.UseVisualStyleBackColor = true;
+btnBackup.Click += btnBackup_Click;
+
+btnRestore.Location = new Point(692, 477);
+btnRestore.Name = "btnRestore";
+btnRestore.Size = new Size(192, 34);
+btnRestore.TabIndex = 15;
+btnRestore.Text = "Restore from Backup";
+btnRestore.UseVisualStyleBackColor = true;
+btnRestore.Click += btnRestore_Click;
+
+btnExport.Location = new Point(1016, 430);
+btnExport.Name = "btnExport";
+btnExport.Size = new Size(112, 34);
+btnExport.TabIndex = 16;
+btnExport.Text = "Export";
+btnExport.UseVisualStyleBackColor = true;
+btnExport.Click += btnExport_Click;
+
             // 
             // DashboardForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1025, 450);
-            Controls.Add(btnSharePassword);
-            Controls.Add(btnBulkDeletePasswords);
-            Controls.Add(btnGeneratePassword);
-            Controls.Add(btnDeletePassword);
-            Controls.Add(btnEditPassword);
+ClientSize = new Size(1246, 680);
+Controls.Add(btnSharePassword);
+Controls.Add(btnBulkDeletePasswords);
+Controls.Add(btnGeneratePassword);
+Controls.Add(btnDeletePassword);
+Controls.Add(btnEditPassword);
+Controls.Add(btnExport);
+Controls.Add(btnRestore);
+Controls.Add(btnBackup);
+
             Controls.Add(btnTogglePasswords);
             Controls.Add(lvPasswords);
             Controls.Add(btnSavePassword);
@@ -216,10 +240,13 @@
         private ColumnHeader Website;
         private ColumnHeader Password;
         private Button btnTogglePasswords;
-        private Button btnEditPassword;
-        private Button btnDeletePassword;
-        private Button btnGeneratePassword;
-        private Button btnBulkDeletePasswords;
-        private Button btnSharePassword;
+private Button btnEditPassword;
+private Button btnDeletePassword;
+private Button btnGeneratePassword;
+private Button btnBulkDeletePasswords;
+private Button btnSharePassword;
+private Button btnBackup;
+private Button btnRestore;
+private Button btnExport;
     }
 }

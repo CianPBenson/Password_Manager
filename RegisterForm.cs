@@ -229,46 +229,45 @@ namespace Password_Manager
             MessageBox.Show("User registered successfully!");
         }
 
-        public bool UserPersistanceRead(string username, string email)
+   public bool UserPersistanceRead(string username, string email)
+{
+    string filePath = @"C:\Temp\userPersistance.txt";
+    Directory.CreateDirectory(@"C:\Temp");
+
+    if (!File.Exists(filePath)) return false;
+
+    bool usernameTaken = false;
+    bool emailTaken = false;
+
+    using (StreamReader reader = new StreamReader(filePath))
+    {
+        string line;
+        while ((line = reader.ReadLine()) != null)
         {
+            string[] parts = line.Split(',');
+            if (parts.Length < 3) continue;
 
-            string filePath = @"C:\Temp\userPersistance.txt";
-            Directory.CreateDirectory(@"C:\Temp");
+            string fileUsername = parts[0].Trim();
+            string fileEmail = parts[1].Trim();
 
-            if (!File.Exists(filePath)) return false;
-
-            bool usernameTaken = false;
-            bool emailTaken = false;
-
-            using (StreamReader reader = new StreamReader(filePath))
+            if (fileUsername.Equals(username, StringComparison.OrdinalIgnoreCase))
             {
-                string line;
-                while ((line = reader.ReadLine()) != null) 
-                {
-                    string[] parts = line.Split(',');
-                    if (parts.Length < 3) continue;
-
-                    string fileUsername = parts[0].Trim();
-                    string fileEmail = parts[1].Trim();
-
-                    if (fileUsername.Equals(username, StringComparison.OrdinalIgnoreCase))
-                    {
-                        MessageBox.Show("Username Taken!");
-                        txtUsername.Text = "Username";
-                        usernameTaken = true;
-                    }
-
-                    if (fileEmail.Equals(email, StringComparison.OrdinalIgnoreCase))
-                    {
-                        MessageBox.Show("Email already in use!");
-                        txtEmail.Text = "Email";
-                        emailTaken = true;
-                    }
-                }
+                MessageBox.Show("Username Taken!");
+                txtUsername.Text = "Username";
+                usernameTaken = true;
             }
 
-            return usernameTaken || emailTaken;
+            if (fileEmail.Equals(email, StringComparison.OrdinalIgnoreCase))
+            {
+                MessageBox.Show("Email already in use!");
+                txtEmail.Text = "Email";
+                emailTaken = true;
+            }
         }
+    }
+
+    return usernameTaken || emailTaken;
+}
 
 
         private void UserPersistanceWrite(List<User> users)
