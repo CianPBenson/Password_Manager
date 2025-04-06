@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -94,6 +95,157 @@ namespace Password_Manager
             }
         }
 
+        private void btnEditPassword_Click(object sender, EventArgs e)
+        {
+            if (lvPasswords.SelectedItems.Count > 0)
+            {
+                ListViewItem selectedItem = lvPasswords.SelectedItems[0];
+                string website = selectedItem.Text;
+                string password = selectedItem.SubItems[1].Text;
+                txtWebsite.Text = website;
+                txtWebsitePassword.Text = password;
+                // Optionally, you can remove the selected item from the list
+                lvPasswords.Items.Remove(selectedItem);
+            }
+            else
+            {
+                MessageBox.Show("Please select a password to edit.");
+            }
+        }
+
+        private void btnDeletePassword_Click(object sender, EventArgs e)
+        {
+            if (lvPasswords.SelectedItems.Count > 0)
+            {
+                ListViewItem selectedItem = lvPasswords.SelectedItems[0];
+                string website = selectedItem.Text;
+                string filePath = $"C:\\Temp\\{loggedInUsername}_passwords.txt";
+                string[] lines = File.ReadAllLines(filePath);
+                List<string> updatedLines = new List<string>(lines);
+                updatedLines.RemoveAll(line => line.StartsWith(website + ","));
+                File.WriteAllLines(filePath, updatedLines);
+                lvPasswords.Items.Remove(selectedItem);
+                MessageBox.Show("Password deleted!");
+            }
+            else
+            {
+                MessageBox.Show("Please select a password to delete.");
+            }
+        }
+
+        private void btnGeneratePassword_Click(object sender, EventArgs e)
+        {
+            txtWebsitePassword.Text = GenerateRandomPassword();
+        }
+        private string GenerateRandomPassword()
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_-+=[]{}|;:,.<>?";
+            Random random = new Random();
+            char[] passwordChars = new char[12]; // Length of the password
+            for (int i = 0; i < passwordChars.Length; i++)
+            {
+                passwordChars[i] = chars[random.Next(chars.Length)];
+            }
+            return new string(passwordChars);
+        }
+
+        private void btnBulkDeletePasswords_Click(object sender, EventArgs e)
+        {
+            if (lvPasswords.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Please select passwords to delete.");
+                return;
+            }
+
+            string filePath = Path.Combine("C:\\Temp", $"{loggedInUsername}_passwords.txt");
+
+            try
+            {
+                if (!File.Exists(filePath))
+                {
+                    MessageBox.Show("Password file not found!");
+                    return;
+                }
+
+                // Get all selected websites first
+                var websitesToDelete = new List<string>();
+                foreach (ListViewItem item in lvPasswords.SelectedItems)
+                {
+                    websitesToDelete.Add(item.Text);
+                }
+
+                // Read all lines from file
+                var lines = File.ReadAllLines(filePath).ToList();
+                int initialCount = lines.Count;
+
+                // Remove all matching lines
+                lines.RemoveAll(line => websitesToDelete.Any(website => line.StartsWith(website + ",")));
+
+                // Remove from ListView
+                foreach (string website in websitesToDelete)
+                {
+                    foreach (ListViewItem item in lvPasswords.Items.Cast<ListViewItem>().Where(x => x.Text == website).ToList())
+                    {
+                        lvPasswords.Items.Remove(item);
+                    }
+                }
+
+                // Save changes if any
+                if (initialCount != lines.Count)
+                {
+                    File.WriteAllLines(filePath, lines);
+                    MessageBox.Show($"Deleted {initialCount - lines.Count} password(s) successfully!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error deleting passwords: {ex.Message}");
+            }
+        }
+
+        private void btnSharePassword_Click(object sender, EventArgs e)
+        {
+            if (lvPasswords.SelectedItems.Count > 0)
+            {
+                ListViewItem selectedItem = lvPasswords.SelectedItems[0];
+                string website = selectedItem.Text;
+                string password = selectedItem.SubItems[1].Text;
+
+                string encryptedPassword = EncryptPassword(password);
+                Clipboard.SetText($"Website: {website}\nPassword: {encryptedPassword}");
+
+                MessageBox.Show("Password copied to clipboard with encryption!");
+            }
+            else
+            {
+                MessageBox.Show("Please select a password to share.");
+            }
+        }
+        private string EncryptPassword(string password)
+        {
+            using (Aes aes = Aes.Create())
+            {
+                aes.GenerateKey();
+                aes.GenerateIV();
+                ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
+
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    using (CryptoStream cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
+                    {
+                        using (StreamWriter sw = new StreamWriter(cs))
+                        {
+                            sw.Write(password);
+                        }
+                    }
+
+                    byte[] encrypted = ms.ToArray();
+                    return Convert.ToBase64String(encrypted);
+                }
+            }
+        }
+
+
         private void btnBackup_Click(object sender, EventArgs e)
         {
             string username = loggedInUsername;
@@ -157,5 +309,7 @@ namespace Password_Manager
                 MessageBox.Show($"Error exporting passwords: {ex.Message}");
             }
         }
+
     }
 }
+
