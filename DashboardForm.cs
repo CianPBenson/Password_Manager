@@ -151,24 +151,55 @@ namespace Password_Manager
 
         private void btnBulkDeletePasswords_Click(object sender, EventArgs e)
         {
-            if (lvPasswords.SelectedItems.Count > 0)
-            {
-                string filePath = $"C:\\Temp\\{loggedInUsername}_passwords.txt";
-                var lines = File.ReadAllLines(filePath).ToList();
-
-                foreach (ListViewItem selectedItem in lvPasswords.SelectedItems)
-                {
-                    string website = selectedItem.Text;
-                    lines.RemoveAll(line => line.StartsWith(website + ","));
-                    lvPasswords.Items.Remove(selectedItem);
-                }
-
-                File.WriteAllLines(filePath, lines);
-                MessageBox.Show("Selected passwords deleted!");
-            }
-            else
+            if (lvPasswords.SelectedItems.Count == 0)
             {
                 MessageBox.Show("Please select passwords to delete.");
+                return;
+            }
+
+            string filePath = Path.Combine("C:\\Temp", $"{loggedInUsername}_passwords.txt");
+
+            try
+            {
+                if (!File.Exists(filePath))
+                {
+                    MessageBox.Show("Password file not found!");
+                    return;
+                }
+
+                // Get all selected websites first
+                var websitesToDelete = new List<string>();
+                foreach (ListViewItem item in lvPasswords.SelectedItems)
+                {
+                    websitesToDelete.Add(item.Text);
+                }
+
+                // Read all lines from file
+                var lines = File.ReadAllLines(filePath).ToList();
+                int initialCount = lines.Count;
+
+                // Remove all matching lines
+                lines.RemoveAll(line => websitesToDelete.Any(website => line.StartsWith(website + ",")));
+
+                // Remove from ListView
+                foreach (string website in websitesToDelete)
+                {
+                    foreach (ListViewItem item in lvPasswords.Items.Cast<ListViewItem>().Where(x => x.Text == website).ToList())
+                    {
+                        lvPasswords.Items.Remove(item);
+                    }
+                }
+
+                // Save changes if any
+                if (initialCount != lines.Count)
+                {
+                    File.WriteAllLines(filePath, lines);
+                    MessageBox.Show($"Deleted {initialCount - lines.Count} password(s) successfully!");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error deleting passwords: {ex.Message}");
             }
         }
 
