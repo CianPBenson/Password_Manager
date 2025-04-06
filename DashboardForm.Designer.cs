@@ -38,6 +38,9 @@
             Website = new ColumnHeader();
             Password = new ColumnHeader();
             btnTogglePasswords = new Button();
+            btnBackup = new Button();
+            btnRestore = new Button();
+            btnExport = new Button();
             SuspendLayout();
             // 
             // lblWelcome
@@ -124,11 +127,44 @@
             btnTogglePasswords.UseVisualStyleBackColor = true;
             btnTogglePasswords.Click += btnTogglePasswords_Click;
             // 
+            // btnBackup
+            // 
+            btnBackup.Location = new Point(675, 394);
+            btnBackup.Name = "btnBackup";
+            btnBackup.Size = new Size(221, 34);
+            btnBackup.TabIndex = 9;
+            btnBackup.Text = "BackUpPasswords";
+            btnBackup.UseVisualStyleBackColor = true;
+            btnBackup.Click += btnBackup_Click;
+            // 
+            // btnRestore
+            // 
+            btnRestore.Location = new Point(692, 477);
+            btnRestore.Name = "btnRestore";
+            btnRestore.Size = new Size(192, 34);
+            btnRestore.TabIndex = 10;
+            btnRestore.Text = "Restore from Backup";
+            btnRestore.UseVisualStyleBackColor = true;
+            btnRestore.Click += btnRestore_Click;
+            // 
+            // btnExport
+            // 
+            btnExport.Location = new Point(1016, 430);
+            btnExport.Name = "btnExport";
+            btnExport.Size = new Size(112, 34);
+            btnExport.TabIndex = 11;
+            btnExport.Text = "Export";
+            btnExport.UseVisualStyleBackColor = true;
+            btnExport.Click += btnExport_Click;
+            // 
             // DashboardForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1025, 450);
+            ClientSize = new Size(1246, 680);
+            Controls.Add(btnExport);
+            Controls.Add(btnRestore);
+            Controls.Add(btnBackup);
             Controls.Add(btnTogglePasswords);
             Controls.Add(lvPasswords);
             Controls.Add(btnSavePassword);
@@ -156,5 +192,8 @@
         private ColumnHeader Website;
         private ColumnHeader Password;
         private Button btnTogglePasswords;
+        private Button btnBackup;
+        private Button btnRestore;
+        private Button btnExport;
     }
 }
