@@ -80,7 +80,7 @@ namespace Password_Manager
 
         private void btnTogglePasswords_Click(object sender, EventArgs e)
         {
-            
+
             lvPasswords.Visible = !lvPasswords.Visible;
 
             if (lvPasswords.Visible)
@@ -91,6 +91,23 @@ namespace Password_Manager
             else
             {
                 btnTogglePasswords.Text = "See All Passwords";
+            }
+        }
+
+        private void btnBackup_Click(object sender, EventArgs e)
+        {
+            string username = loggedInUsername;
+            string userFile = $@"C:\Temp\{username}_passwords.txt";
+            string backupFile = $@"C:\Temp\{username}_backup.txt";
+
+            if (File.Exists(userFile))
+            {
+                File.Copy(userFile, backupFile, true);
+                MessageBox.Show("Backup created successfully!");
+            }
+            else
+            {
+                MessageBox.Show("No password file found to backup.");
             }
         }
     }

@@ -38,6 +38,7 @@
             Website = new ColumnHeader();
             Password = new ColumnHeader();
             btnTogglePasswords = new Button();
+            btnBackup = new Button();
             SuspendLayout();
             // 
             // lblWelcome
@@ -124,11 +125,22 @@
             btnTogglePasswords.UseVisualStyleBackColor = true;
             btnTogglePasswords.Click += btnTogglePasswords_Click;
             // 
+            // btnBackup
+            // 
+            btnBackup.Location = new Point(697, 428);
+            btnBackup.Name = "btnBackup";
+            btnBackup.Size = new Size(221, 34);
+            btnBackup.TabIndex = 9;
+            btnBackup.Text = "BackUpPasswords";
+            btnBackup.UseVisualStyleBackColor = true;
+            btnBackup.Click += btnBackup_Click;
+            // 
             // DashboardForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1025, 450);
+            ClientSize = new Size(1025, 568);
+            Controls.Add(btnBackup);
             Controls.Add(btnTogglePasswords);
             Controls.Add(lvPasswords);
             Controls.Add(btnSavePassword);
@@ -156,5 +168,6 @@
         private ColumnHeader Website;
         private ColumnHeader Password;
         private Button btnTogglePasswords;
+        private Button btnBackup;
     }
 }
