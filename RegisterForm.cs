@@ -231,22 +231,42 @@ namespace Password_Manager
 
         public bool UserPersistanceRead(string username, string email)
         {
-            string projectDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            string filePath = Path.Combine(projectDirectory, "userPersistance.txt");
+             string filePath = @"C:\Temp\userPersistance.txt";
+    Directory.CreateDirectory(@"C:\Temp");
 
-            if (!File.Exists(filePath)) return false;
+    if (!File.Exists(filePath)) return false;
 
+    bool usernameTaken = false;
+    bool emailTaken = false;
 
-            // Make sure the folder exists
-            Directory.CreateDirectory("C:\\Temp");
+    using (StreamReader reader = new StreamReader(filePath))
+    {
+        string line;
+        while ((line = reader.ReadLine()) != null)
+        {
+            string[] parts = line.Split(',');
+            if (parts.Length < 3) continue;
 
-            // If the file doesn't exist, just return (no existing users yet)
-            if (!File.Exists(filePath))
-                return;
+            string fileUsername = parts[0].Trim();
+            string fileEmail = parts[1].Trim();
 
+            if (fileUsername.Equals(username, StringComparison.OrdinalIgnoreCase))
+            {
+                MessageBox.Show("Username Taken!");
+                txtUsername.Text = "Username";
+                usernameTaken = true;
+            }
 
-            bool usernameTaken = false;
-            bool emailTaken = false;
+            if (fileEmail.Equals(email, StringComparison.OrdinalIgnoreCase))
+            {
+                MessageBox.Show("Email already in use!");
+                txtEmail.Text = "Email";
+                emailTaken = true;
+            }
+        }
+    }
+
+    return usernameTaken || emailTaken;
 
 
           
@@ -257,8 +277,8 @@ namespace Password_Manager
         {
             try
             {
-                string projectDirectory = AppDomain.CurrentDomain.BaseDirectory;
-                string filePath = Path.Combine(projectDirectory, "userPersistance.txt");
+                string filePath = @"C:\Temp\userPersistance.txt";
+                Directory.CreateDirectory(@"C:\Temp");
 
                 using (StreamWriter writer = new StreamWriter(filePath, true))
                 {
