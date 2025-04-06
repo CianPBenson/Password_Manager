@@ -22,7 +22,7 @@ namespace Password_Manager
 
         private void DashboardForm_Load(object sender, EventArgs e)
         {
-
+            LoadUserPasswords();
         }
 
         private void btnSavePassword_Click(object sender, EventArgs e)
@@ -36,7 +36,7 @@ namespace Password_Manager
                 return;
             }
 
-           
+
             string filePath = $"C:\\Temp\\{loggedInUsername}_passwords.txt";
 
             Directory.CreateDirectory("C:\\Temp");
@@ -48,6 +48,50 @@ namespace Password_Manager
             MessageBox.Show("Password saved!");
             txtWebsite.Clear();
             txtWebsitePassword.Clear();
+        }
+
+        private void LoadUserPasswords()
+        {
+            string filePath = $"C:\\Temp\\{loggedInUsername}_passwords.txt";
+
+            lvPasswords.Items.Clear(); // Clear existing items
+
+            if (!File.Exists(filePath))
+            {
+                return; // No passwords saved yet
+            }
+
+            string[] lines = File.ReadAllLines(filePath);
+            foreach (string line in lines)
+            {
+                string[] parts = line.Split(',');
+                if (parts.Length == 2)
+                {
+                    string website = parts[0].Trim();
+                    string password = parts[1].Trim();
+
+                    ListViewItem item = new ListViewItem(website);
+                    item.SubItems.Add(password);
+
+                    lvPasswords.Items.Add(item);
+                }
+            }
+        }
+
+        private void btnTogglePasswords_Click(object sender, EventArgs e)
+        {
+            
+            lvPasswords.Visible = !lvPasswords.Visible;
+
+            if (lvPasswords.Visible)
+            {
+                LoadUserPasswords();
+                btnTogglePasswords.Text = "Hide Passwords";
+            }
+            else
+            {
+                btnTogglePasswords.Text = "See All Passwords";
+            }
         }
     }
 }

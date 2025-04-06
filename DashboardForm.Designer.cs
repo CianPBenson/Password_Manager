@@ -34,6 +34,10 @@
             label1 = new Label();
             label2 = new Label();
             btnSavePassword = new Button();
+            lvPasswords = new ListView();
+            Website = new ColumnHeader();
+            Password = new ColumnHeader();
+            btnTogglePasswords = new Button();
             SuspendLayout();
             // 
             // lblWelcome
@@ -47,14 +51,14 @@
             // 
             // txtWebsite
             // 
-            txtWebsite.Location = new Point(285, 148);
+            txtWebsite.Location = new Point(223, 148);
             txtWebsite.Name = "txtWebsite";
             txtWebsite.Size = new Size(150, 31);
             txtWebsite.TabIndex = 1;
             // 
             // txtWebsitePassword
             // 
-            txtWebsitePassword.Location = new Point(285, 230);
+            txtWebsitePassword.Location = new Point(223, 233);
             txtWebsitePassword.Name = "txtWebsitePassword";
             txtWebsitePassword.Size = new Size(150, 31);
             txtWebsitePassword.TabIndex = 2;
@@ -62,7 +66,7 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(137, 154);
+            label1.Location = new Point(80, 151);
             label1.Name = "label1";
             label1.Size = new Size(75, 25);
             label1.TabIndex = 4;
@@ -71,7 +75,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(137, 236);
+            label2.Location = new Point(80, 236);
             label2.Name = "label2";
             label2.Size = new Size(87, 25);
             label2.TabIndex = 5;
@@ -87,11 +91,46 @@
             btnSavePassword.UseVisualStyleBackColor = true;
             btnSavePassword.Click += btnSavePassword_Click;
             // 
+            // lvPasswords
+            // 
+            lvPasswords.Columns.AddRange(new ColumnHeader[] { Website, Password });
+            lvPasswords.FullRowSelect = true;
+            lvPasswords.GridLines = true;
+            lvPasswords.Location = new Point(636, 151);
+            lvPasswords.Name = "lvPasswords";
+            lvPasswords.Size = new Size(282, 206);
+            lvPasswords.TabIndex = 7;
+            lvPasswords.UseCompatibleStateImageBehavior = false;
+            lvPasswords.View = View.Details;
+            lvPasswords.Visible = false;
+            // 
+            // Website
+            // 
+            Website.Text = "Website";
+            Website.Width = 150;
+            // 
+            // Password
+            // 
+            Password.Text = "Password";
+            Password.Width = 150;
+            // 
+            // btnTogglePasswords
+            // 
+            btnTogglePasswords.Location = new Point(665, 93);
+            btnTogglePasswords.Name = "btnTogglePasswords";
+            btnTogglePasswords.Size = new Size(209, 34);
+            btnTogglePasswords.TabIndex = 8;
+            btnTogglePasswords.Text = "See all passwords";
+            btnTogglePasswords.UseVisualStyleBackColor = true;
+            btnTogglePasswords.Click += btnTogglePasswords_Click;
+            // 
             // DashboardForm
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1025, 450);
+            Controls.Add(btnTogglePasswords);
+            Controls.Add(lvPasswords);
             Controls.Add(btnSavePassword);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -113,5 +152,9 @@
         private Label label1;
         private Label label2;
         private Button btnSavePassword;
+        private ListView lvPasswords;
+        private ColumnHeader Website;
+        private ColumnHeader Password;
+        private Button btnTogglePasswords;
     }
 }
