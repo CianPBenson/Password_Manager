@@ -298,7 +298,11 @@ namespace Password_Manager
 
                         writer.WriteLine($"Website: {website}");
                         writer.WriteLine($"Password: {password}");
+<<<<<<< HEAD
                         writer.WriteLine();
+=======
+                        writer.WriteLine(); 
+>>>>>>> aa6324302b48e1cb9fb552a2091333ee4b01857b
                     }
                 }
 
@@ -310,11 +314,14 @@ namespace Password_Manager
             }
         }
 
+<<<<<<< HEAD
         private void btnAccountDetails_Click(object sender, EventArgs e)
         {
             AccountForm accountForm = new AccountForm(loggedInUsername, this);
             accountForm.Show();
         }
+=======
+>>>>>>> aa6324302b48e1cb9fb552a2091333ee4b01857b
     }
 }
 
