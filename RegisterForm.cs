@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 ﻿using StarLib;
+=======
+﻿using Microsoft.VisualBasic.ApplicationServices;
+using StarLib;
+>>>>>>> 2be342d865c5d17aaab434381559123833612930
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,7 +16,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Password_Manager
+<<<<<<< HEAD
 {   //cian 
+=======
+{
+>>>>>>> 2be342d865c5d17aaab434381559123833612930
     public partial class RegisterForm : Form
     {
         private StarField starField = new StarField();
@@ -22,6 +31,10 @@ namespace Password_Manager
         public RegisterForm()
         {
             InitializeComponent();
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2be342d865c5d17aaab434381559123833612930
             this.DoubleBuffered = true;
             this.BackColor = Color.Black;
 
@@ -177,6 +190,10 @@ namespace Password_Manager
             }
         }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 2be342d865c5d17aaab434381559123833612930
         private void btnSubmit_Click(object sender, EventArgs e)
         {
             string username = txtUsername.Text.Trim();
@@ -220,6 +237,7 @@ namespace Password_Manager
                 return;
             }
 
+<<<<<<< HEAD
             // Store the password directly without hashing
             User newUser = new User(username, email, password);
             userList.Add(newUser);
@@ -227,6 +245,15 @@ namespace Password_Manager
             MessageBox.Show("User registered successfully!");
         }
 
+=======
+            User newUser = new User(username, email, password);
+            userList.Add(newUser);
+            UserPersistanceWrite(userList);
+            MessageBox.Show("User registered successfully!");
+        }
+
+<<<<<<< HEAD
+>>>>>>> 2be342d865c5d17aaab434381559123833612930
         public bool UserPersistanceRead(string username, string email)
         {
             string filePath = @"C:\Temp\userPersistance.txt";
@@ -263,8 +290,55 @@ namespace Password_Manager
 
             return usernameTaken || emailTaken;
         }
+<<<<<<< HEAD
 
         private void UserPersistanceWrite(User newUser)
+=======
+=======
+   public bool UserPersistanceRead(string username, string email)
+{
+    string filePath = @"C:\Temp\userPersistance.txt";
+    Directory.CreateDirectory(@"C:\Temp");
+
+    if (!File.Exists(filePath)) return false;
+
+    bool usernameTaken = false;
+    bool emailTaken = false;
+
+    using (StreamReader reader = new StreamReader(filePath))
+    {
+        string line;
+        while ((line = reader.ReadLine()) != null)
+        {
+            string[] parts = line.Split(',');
+            if (parts.Length < 3) continue;
+
+            string fileUsername = parts[0].Trim();
+            string fileEmail = parts[1].Trim();
+
+            if (fileUsername.Equals(username, StringComparison.OrdinalIgnoreCase))
+            {
+                MessageBox.Show("Username Taken!");
+                txtUsername.Text = "Username";
+                usernameTaken = true;
+            }
+
+            if (fileEmail.Equals(email, StringComparison.OrdinalIgnoreCase))
+            {
+                MessageBox.Show("Email already in use!");
+                txtEmail.Text = "Email";
+                emailTaken = true;
+            }
+        }
+    }
+
+    return usernameTaken || emailTaken;
+}
+
+>>>>>>> aa6324302b48e1cb9fb552a2091333ee4b01857b
+
+        private void UserPersistanceWrite(List<User> users)
+>>>>>>> 2be342d865c5d17aaab434381559123833612930
         {
             try
             {
@@ -273,10 +347,23 @@ namespace Password_Manager
 
                 using (StreamWriter writer = new StreamWriter(filePath, true))
                 {
+<<<<<<< HEAD
                     writer.WriteLine(newUser.ToString());
                 }
 
                 MessageBox.Show("User data saved successfully!");
+=======
+                    foreach (User user in users)
+                    {
+                        writer.WriteLine(user.ToString());
+                    }
+                }
+<<<<<<< HEAD
+=======
+
+                MessageBox.Show("User data saved successfully!");
+>>>>>>> aa6324302b48e1cb9fb552a2091333ee4b01857b
+>>>>>>> 2be342d865c5d17aaab434381559123833612930
             }
             catch (Exception ex)
             {

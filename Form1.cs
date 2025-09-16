@@ -14,9 +14,14 @@ using System.Windows.Forms;
 using StarLib;
 using System.Reflection.Emit;
 
+<<<<<<< HEAD
 //Cian
 namespace Password_Manager
 { 
+=======
+namespace Password_Manager
+{
+>>>>>>> 2be342d865c5d17aaab434381559123833612930
     public partial class Form1 : Form
     {
         private StarField starField = new StarField();

@@ -4,7 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
+<<<<<<< HEAD
 //Cian 
+=======
+>>>>>>> 2be342d865c5d17aaab434381559123833612930
 namespace Password_Manager
 {
     public partial class AccountForm : Form

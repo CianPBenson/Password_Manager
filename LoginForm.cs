@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 ﻿using StarLib;
 using System;
+=======
+﻿using System;
+>>>>>>> 2be342d865c5d17aaab434381559123833612930
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,6 +13,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+<<<<<<< HEAD
 //Arman
 namespace Password_Manager
 { 
@@ -44,6 +49,15 @@ namespace Password_Manager
         {
             base.OnPaint(e);
             starField.Draw(e.Graphics);
+=======
+namespace Password_Manager
+{
+    public partial class LoginForm : Form
+    {
+        public LoginForm()
+        {
+            InitializeComponent();
+>>>>>>> 2be342d865c5d17aaab434381559123833612930
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -51,7 +65,11 @@ namespace Password_Manager
             string enteredEmail = txtEmail.Text.Trim();
             string enteredPassword = txtPassword.Text;
 
+<<<<<<< HEAD
             string filePath = "C:\\Temp\\userPersistance.txt";
+=======
+            string filePath = "C:\\Temp\\userPersistance.txt"; 
+>>>>>>> 2be342d865c5d17aaab434381559123833612930
 
             if (!File.Exists(filePath))
             {
@@ -77,7 +95,11 @@ namespace Password_Manager
                     if (fileEmail == enteredEmail && filePassword == enteredPassword)
                     {
                         loginSuccess = true;
+<<<<<<< HEAD
                         loggedInUsername = fileUsername;
+=======
+                        loggedInUsername = fileUsername; 
+>>>>>>> 2be342d865c5d17aaab434381559123833612930
                         break;
                     }
                 }
@@ -88,7 +110,11 @@ namespace Password_Manager
                 MessageBox.Show("Login successful!");
                 DashboardForm dashboard = new DashboardForm(loggedInUsername);
                 dashboard.Show();
+<<<<<<< HEAD
                 this.Hide();
+=======
+                this.Hide(); 
+>>>>>>> 2be342d865c5d17aaab434381559123833612930
             }
             else
             {
@@ -97,14 +123,22 @@ namespace Password_Manager
 
         }
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 2be342d865c5d17aaab434381559123833612930
         private void label1_Click(object sender, EventArgs e)
         {
 
         }
+<<<<<<< HEAD
 
         private void LoginForm_Load(object sender, EventArgs e)
         {
 
         }
+=======
+>>>>>>> 2be342d865c5d17aaab434381559123833612930
     }
 }

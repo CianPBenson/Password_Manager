@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 ﻿using StarLib;
 using System;
+=======
+﻿using System;
+>>>>>>> 2be342d865c5d17aaab434381559123833612930
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,6 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+<<<<<<< HEAD
 //Cian, Arman, Pedro
 namespace Password_Manager
 {
@@ -54,16 +59,35 @@ namespace Password_Manager
         
         private void DashboardForm_Load(object sender, EventArgs e)
         {//Arman
+=======
+namespace Password_Manager
+{
+    public partial class DashboardForm : Form
+    {
+        private string loggedInUsername;
+        public DashboardForm(string username)
+        {
+            InitializeComponent();
+            loggedInUsername = username;
+            lblWelcome.Text = $"Hello {username}, welcome to your password manager!";
+        }
+
+        private void DashboardForm_Load(object sender, EventArgs e)
+        {
+>>>>>>> 2be342d865c5d17aaab434381559123833612930
             LoadUserPasswords();
         }
 
         private void btnSavePassword_Click(object sender, EventArgs e)
         {
+<<<<<<< HEAD
             //Pedro
             isEditingPassword = false;
 
 
             //Arman
+=======
+>>>>>>> 2be342d865c5d17aaab434381559123833612930
             string website = txtWebsite.Text.Trim();
             string password = txtWebsitePassword.Text.Trim();
 
@@ -85,6 +109,7 @@ namespace Password_Manager
             MessageBox.Show("Password saved!");
             txtWebsite.Clear();
             txtWebsitePassword.Clear();
+<<<<<<< HEAD
 
             LoadUserPasswords();
             lvPasswords.Refresh();
@@ -99,6 +124,19 @@ namespace Password_Manager
             if (!File.Exists(filePath))
             {
                 return; 
+=======
+        }
+
+        private void LoadUserPasswords()
+        {
+            string filePath = $"C:\\Temp\\{loggedInUsername}_passwords.txt";
+
+            lvPasswords.Items.Clear(); // Clear existing items
+
+            if (!File.Exists(filePath))
+            {
+                return; // No passwords saved yet
+>>>>>>> 2be342d865c5d17aaab434381559123833612930
             }
 
             string[] lines = File.ReadAllLines(filePath);
@@ -119,7 +157,11 @@ namespace Password_Manager
         }
 
         private void btnTogglePasswords_Click(object sender, EventArgs e)
+<<<<<<< HEAD
         { //Arman
+=======
+        {
+>>>>>>> 2be342d865c5d17aaab434381559123833612930
 
             lvPasswords.Visible = !lvPasswords.Visible;
 
@@ -134,6 +176,7 @@ namespace Password_Manager
             }
         }
 
+<<<<<<< HEAD
         //Pedro
         private bool isEditingPassword = false;
 
@@ -182,6 +225,19 @@ namespace Password_Manager
                 File.WriteAllLines(filePath, updatedLines);
 
                 MessageBox.Show("Password removed from the list and file.");
+=======
+        private void btnEditPassword_Click(object sender, EventArgs e)
+        {
+            if (lvPasswords.SelectedItems.Count > 0)
+            {
+                ListViewItem selectedItem = lvPasswords.SelectedItems[0];
+                string website = selectedItem.Text;
+                string password = selectedItem.SubItems[1].Text;
+                txtWebsite.Text = website;
+                txtWebsitePassword.Text = password;
+                // Optionally, you can remove the selected item from the list
+                lvPasswords.Items.Remove(selectedItem);
+>>>>>>> 2be342d865c5d17aaab434381559123833612930
             }
             else
             {
@@ -190,7 +246,11 @@ namespace Password_Manager
         }
 
         private void btnDeletePassword_Click(object sender, EventArgs e)
+<<<<<<< HEAD
         { //Pedro
+=======
+        {
+>>>>>>> 2be342d865c5d17aaab434381559123833612930
             if (lvPasswords.SelectedItems.Count > 0)
             {
                 ListViewItem selectedItem = lvPasswords.SelectedItems[0];
@@ -210,11 +270,19 @@ namespace Password_Manager
         }
 
         private void btnGeneratePassword_Click(object sender, EventArgs e)
+<<<<<<< HEAD
         { //Pedro
             txtWebsitePassword.Text = GenerateRandomPassword();
         }
         private string GenerateRandomPassword()
         { //Pedro
+=======
+        {
+            txtWebsitePassword.Text = GenerateRandomPassword();
+        }
+        private string GenerateRandomPassword()
+        {
+>>>>>>> 2be342d865c5d17aaab434381559123833612930
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_-+=[]{}|;:,.<>?";
             Random random = new Random();
             char[] passwordChars = new char[12]; // Length of the password
@@ -226,7 +294,11 @@ namespace Password_Manager
         }
 
         private void btnBulkDeletePasswords_Click(object sender, EventArgs e)
+<<<<<<< HEAD
         {// Pedro
+=======
+        {
+>>>>>>> 2be342d865c5d17aaab434381559123833612930
             if (lvPasswords.SelectedItems.Count == 0)
             {
                 MessageBox.Show("Please select passwords to delete.");
@@ -243,18 +315,30 @@ namespace Password_Manager
                     return;
                 }
 
+<<<<<<< HEAD
+=======
+                // Get all selected websites first
+>>>>>>> 2be342d865c5d17aaab434381559123833612930
                 var websitesToDelete = new List<string>();
                 foreach (ListViewItem item in lvPasswords.SelectedItems)
                 {
                     websitesToDelete.Add(item.Text);
                 }
 
+<<<<<<< HEAD
+=======
+                // Read all lines from file
+>>>>>>> 2be342d865c5d17aaab434381559123833612930
                 var lines = File.ReadAllLines(filePath).ToList();
                 int initialCount = lines.Count;
 
                 // Remove all matching lines
                 lines.RemoveAll(line => websitesToDelete.Any(website => line.StartsWith(website + ",")));
 
+<<<<<<< HEAD
+=======
+                // Remove from ListView
+>>>>>>> 2be342d865c5d17aaab434381559123833612930
                 foreach (string website in websitesToDelete)
                 {
                     foreach (ListViewItem item in lvPasswords.Items.Cast<ListViewItem>().Where(x => x.Text == website).ToList())
@@ -263,6 +347,10 @@ namespace Password_Manager
                     }
                 }
 
+<<<<<<< HEAD
+=======
+                // Save changes if any
+>>>>>>> 2be342d865c5d17aaab434381559123833612930
                 if (initialCount != lines.Count)
                 {
                     File.WriteAllLines(filePath, lines);
@@ -276,13 +364,18 @@ namespace Password_Manager
         }
 
         private void btnSharePassword_Click(object sender, EventArgs e)
+<<<<<<< HEAD
         { // Cian
+=======
+        {
+>>>>>>> 2be342d865c5d17aaab434381559123833612930
             if (lvPasswords.SelectedItems.Count > 0)
             {
                 ListViewItem selectedItem = lvPasswords.SelectedItems[0];
                 string website = selectedItem.Text;
                 string password = selectedItem.SubItems[1].Text;
 
+<<<<<<< HEAD
                 string recipientUsername = txtRecipientUsername.Text.Trim(); 
 
                 if (string.IsNullOrWhiteSpace(recipientUsername))
@@ -304,12 +397,19 @@ namespace Password_Manager
                 {
                     MessageBox.Show("Recipient username not found.");
                 }
+=======
+                string encryptedPassword = EncryptPassword(password);
+                Clipboard.SetText($"Website: {website}\nPassword: {encryptedPassword}");
+
+                MessageBox.Show("Password copied to clipboard with encryption!");
+>>>>>>> 2be342d865c5d17aaab434381559123833612930
             }
             else
             {
                 MessageBox.Show("Please select a password to share.");
             }
         }
+<<<<<<< HEAD
 
         private bool UserExists(string username)
         { //Cian
@@ -334,6 +434,35 @@ namespace Password_Manager
 
         private void btnBackup_Click(object sender, EventArgs e)
         { // Arman
+=======
+        private string EncryptPassword(string password)
+        {
+            using (Aes aes = Aes.Create())
+            {
+                aes.GenerateKey();
+                aes.GenerateIV();
+                ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
+
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    using (CryptoStream cs = new CryptoStream(ms, encryptor, CryptoStreamMode.Write))
+                    {
+                        using (StreamWriter sw = new StreamWriter(cs))
+                        {
+                            sw.Write(password);
+                        }
+                    }
+
+                    byte[] encrypted = ms.ToArray();
+                    return Convert.ToBase64String(encrypted);
+                }
+            }
+        }
+
+
+        private void btnBackup_Click(object sender, EventArgs e)
+        {
+>>>>>>> 2be342d865c5d17aaab434381559123833612930
             string username = loggedInUsername;
             string userFile = $@"C:\Temp\{username}_passwords.txt";
             string backupFile = $@"C:\Temp\{username}_backup.txt";
@@ -350,7 +479,11 @@ namespace Password_Manager
         }
 
         private void btnRestore_Click(object sender, EventArgs e)
+<<<<<<< HEAD
         { //Arman
+=======
+        {
+>>>>>>> 2be342d865c5d17aaab434381559123833612930
             string username = loggedInUsername;
             string backupFile = $@"C:\Temp\{username}_backup.txt";
             string userFile = $@"C:\Temp\{username}_passwords.txt";
@@ -369,7 +502,11 @@ namespace Password_Manager
         }
 
         private void btnExport_Click(object sender, EventArgs e)
+<<<<<<< HEAD
         {//Arman
+=======
+        {
+>>>>>>> 2be342d865c5d17aaab434381559123833612930
             string username = loggedInUsername;
             string exportPath = $@"C:\Temp\{username}_export.txt";
 
@@ -384,11 +521,19 @@ namespace Password_Manager
 
                         writer.WriteLine($"Website: {website}");
                         writer.WriteLine($"Password: {password}");
+<<<<<<< HEAD
 
                         writer.WriteLine();
 
                         writer.WriteLine(); 
 
+=======
+<<<<<<< HEAD
+                        writer.WriteLine();
+=======
+                        writer.WriteLine(); 
+>>>>>>> aa6324302b48e1cb9fb552a2091333ee4b01857b
+>>>>>>> 2be342d865c5d17aaab434381559123833612930
                     }
                 }
 
@@ -399,11 +544,23 @@ namespace Password_Manager
                 MessageBox.Show($"Error exporting passwords: {ex.Message}");
             }
         }
+<<<<<<< HEAD
         private void btnAccountDetails_Click(object sender, EventArgs e)
         { // Cian
             AccountForm accountForm = new AccountForm(loggedInUsername, this);
             accountForm.Show();
         }
+=======
+
+<<<<<<< HEAD
+        private void btnAccountDetails_Click(object sender, EventArgs e)
+        {
+            AccountForm accountForm = new AccountForm(loggedInUsername, this);
+            accountForm.Show();
+        }
+=======
+>>>>>>> aa6324302b48e1cb9fb552a2091333ee4b01857b
+>>>>>>> 2be342d865c5d17aaab434381559123833612930
     }
 }
 
